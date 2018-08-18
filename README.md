@@ -694,7 +694,6 @@ expected kind of datasets (20MB for 10,000 2KB documents).
 * Coming Soon! pwSession: a session store for Express, backed by pwDB
 * Coming Soon! pwLogger: If you mostly use PwDB for logging purposes and don't want the memory footprint of your application to grow too large, you can use pwLogger to insert documents in a pwDB database
 * Coming Soon! pwTransfer: If you've outgrown PwDB, switching to MongoDB won't be too hard as it is the same API. A utility to transfer the data from a PwDB database to a MongoDB collection
-
 * Coming Soon! pwODM: Object Data Modeling for pwDB 
 
 ## Pull requests
