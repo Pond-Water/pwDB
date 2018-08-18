@@ -690,12 +690,11 @@ A copy of the whole database is kept in memory. This is not much on the
 expected kind of datasets (20MB for 10,000 2KB documents).
 
 ## Use in other services
-* <a href="https://github.com/pond-water/connect-pwdb-session"
-  target="_blank">connect-pwdb-session</a> is a session store for
-Connect and Express, backed by pwdb
-* If you mostly use PwDB for logging purposes and don't want the memory footprint of your application to grow too large, you can use <a href="https://github.com/pond-water/pwdb-logger" target="_blank">PwDB Logger</a> to insert documents in a PwDB-readable database
-* If you've outgrown PwDB, switching to MongoDB won't be too hard as it is the same API. Use <a href="https://github.com/pond-water/pwdb-to-mongodb" target="_blank">this utility</a> to transfer the data from a PwDB database to a MongoDB collection
-* An ODM for PwDB: <a href="https://github.com/pond-water/" target="_blank">Coming Soon!</a>
+* pwCMS: a Content Management System and Blog platform backed by pwDB. <a href="https://github.com/Pond-Water/pwCMS" target="_blank">Beta available!<a>
+* Coming Soon! pwSession: a session store for Express, backed by pwDB
+* Coming Soon! pwLogger: If you mostly use PwDB for logging purposes and don't want the memory footprint of your application to grow too large, you can use pwLogger to insert documents in a pwDB database
+* Coming Soon! pwTransfer: If you've outgrown PwDB, switching to MongoDB won't be too hard as it is the same API. A utility to transfer the data from a PwDB database to a MongoDB collection
+* Coming Soon! pwODM: Object Data Modeling for pwDB
 
 ## Pull requests
 **Important: I consider PwDB to be feature-complete, i.e. it does everything I think it should and nothing more. As a general rule I will not accept pull requests anymore, except for bugfixes (of course) or if I get convinced I overlook a strong usecase. Please make sure to open an issue before spending time on any PR.**
