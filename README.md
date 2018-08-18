@@ -1,4 +1,4 @@
-<img src="http://i.imgur.com/9O1xHFb.png" style="width: 25%; height: 25%; float: left;">
+<img src="logo.png" style="float: left;">
 
 ## The JavaScript Database
 
@@ -8,13 +8,13 @@
 
 ## Support PwDB development
 
-<img src="http://i.imgur.com/mpwi4lf.jpg">
-
-No time to <a href="#pull-requests">help out</a>? You can support PwDB development by sending money or bitcoins!
+You can support PwDB development by sending money or bitcoins!
 
 Money: [![Donate to author](https://fundly.com/assets/logos/v2/fundly_logo_with_text_181_50.png)](https://fundly.com/pondwater-db)
 
 Bitcoin address: [@TODO:]
+
+No time to <a href="#pull-requests">help out</a>? 
 
 
 ## Installation, tests
