@@ -8,7 +8,7 @@
   "contributors": [
     "Brian Carter"
   ],
-  "description": "File-based embedded data store for node.js",
+  "description": "Pond-Water DB - File-based embedded data store for node.js",
   "keywords": [
     "database",
     "datastore",
