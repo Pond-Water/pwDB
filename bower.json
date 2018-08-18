@@ -1,0 +1,6 @@
+{
+"name": "pwdb",
+"description": "The Javascript Database for Node, nwjs, Electron and the browser",
+"ignore": ["benchmarks", "lib", "test", "test_lac"],
+"main": ["browser-version/pwdb.js"]
+}
