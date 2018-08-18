@@ -1,4 +1,4 @@
-<img src="http://i.imgur.com/9O1xHFb.png" style="width: 25%; height: 25%; float: left;">
+<img src="logo.png" style="float: left;">
 
 ## The JavaScript Database
 
