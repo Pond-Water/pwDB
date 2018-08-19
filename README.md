@@ -14,16 +14,79 @@ Money: [![Donate to author](https://fundly.com/assets/logos/v2/fundly_logo_with_
 
 Bitcoin address: [@TODO:]
 
-No time to <a href="#pull-requests">help out</a>? 
+No funds? How about <a href="#pull-requests">helping out</a>? 
 
 
-## Installation, tests
-Module name on npm and bower is `pwdb`.
+## Barebones example
+Module name on npm  is `pwdb`.
 
 ```
+npm init                   # Create package.json
 npm install pwdb --save    # Put latest version in your package.json
-npm test                   # You'll need the dev dependencies to launch tests
-bower install pwdb         # For the browser versions, which will be in browser-version/out
+```
+
+Create file called server.js, add contents below.
+
+```
+// Type 1: In-memory only datastore (no need to load the database)
+var Datastore = require('pwdb'),
+    db = new Datastore();
+
+var doc = {
+    _type: 'barebones',
+    n: 5,
+    today: new Date(),
+    pwdbIsAwesome: true,
+    notthere: null,
+    notToBeSaved: undefined,
+    fruits: ['apple', 'orange', 'pear'],
+    info: {
+        name: 'pwdb'
+    }
+};
+
+var doc2 = {_type:'barebones',n:100,info:{name:'pwdb'}};
+
+db.insert(doc, function (err, newDoc) { // Callback is optional
+    // newDoc is the newly inserted document, including its _id
+    // newDoc has no key called notToBeSaved since its value was undefined
+    console.log("New _id: " + newDoc._id + "\n");
+});
+
+db.insert(doc2, function (err, newDoc) { // Callback is optional
+    console.log("New _id: " + newDoc._id + "\n");
+});
+
+// Finding all barebones in pwdb
+db.find({_type: 'barebones'
+}, function (err, docs) {
+    // docs is an array containing documents 
+    // If no document is found, docs is equal to []
+
+    docs.forEach(function(doc){
+      console.log(JSON.stringify(doc) + "\n");
+    });
+
+    console.log("barebones count: " + docs.length);
+});
+```
+
+Run barebones
+```
+node server.js
+```
+
+Console output - should be 2 _id & docs (_id will be different each run) and count: 2
+```
+New _id: 2HgfdUKpheKAwquC
+
+New _id: QTtYB176sGF3iCCh
+
+{"_type":"barebones","n":5,"today":"2018-08-19T23:43:19.088Z","pwdbIsAwesome":true,"notthere":null,"fruits":["apple","orange","pear"],"info":{"name":"pwdb"},"_id":"2HgfdUKpheKAwquC"}
+
+{"_type":"barebones","n":100,"info":{"name":"pwdb"},"_id":"QTtYB176sGF3iCCh"}
+
+barebones count: 2
 ```
 
 ## API
