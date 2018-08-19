@@ -729,3 +729,5 @@ See [License](LICENSE)
 
 See [LICENSES](LICENSES)
 
+## Special Thank You!
+NeDB - Launched this works and provided inspiration (https://github.com/louischatriot/nedb)
