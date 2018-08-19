@@ -45,22 +45,16 @@ var doc = {
     }
 };
 
-var doc2 = {
-    _type: 'barebones',
-    n: 100,
-    info: {
-        name: 'pwdb'
-    }
-}
+var doc2 = {_type:'barebones',n:100,info:{name:'pwdb'}};
 
 db.insert(doc, function (err, newDoc) { // Callback is optional
     // newDoc is the newly inserted document, including its _id
     // newDoc has no key called notToBeSaved since its value was undefined
-    console.log("New _id: " + newDoc._id);
+    console.log("New _id: " + newDoc._id + "\n");
 });
 
 db.insert(doc2, function (err, newDoc) { // Callback is optional
-    console.log("New _id: " + newDoc._id);
+    console.log("New _id: " + newDoc._id + "\n");
 });
 
 // Finding all barebones in pwdb
@@ -68,6 +62,11 @@ db.find({_type: 'barebones'
 }, function (err, docs) {
     // docs is an array containing documents 
     // If no document is found, docs is equal to []
+
+    docs.forEach(function(doc){
+      console.log(JSON.stringify(doc) + "\n");
+    });
+
     console.log("barebones count: " + docs.length);
 });
 ```
@@ -77,10 +76,16 @@ Run barebones
 node server.js
 ```
 
-Console output - should be 2 _id (yours will be different) and count: 2
+Console output - should be 2 _id & docs (_id will be different each run) and count: 2
 ```
-New _id: m2siFRaGd8UbLY0b
-New _id: a3FI1onHFaHFOpJH
+New _id: 2HgfdUKpheKAwquC
+
+New _id: QTtYB176sGF3iCCh
+
+{"_type":"barebones","n":5,"today":"2018-08-19T23:43:19.088Z","pwdbIsAwesome":true,"notthere":null,"fruits":["apple","orange","pear"],"info":{"name":"pwdb"},"_id":"2HgfdUKpheKAwquC"}
+
+{"_type":"barebones","n":100,"info":{"name":"pwdb"},"_id":"QTtYB176sGF3iCCh"}
+
 barebones count: 2
 ```
 
