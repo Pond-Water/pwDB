@@ -1,14 +1,14 @@
 <img src="logo.png" style="float: left;">
 
-## The JavaScript Database
+## Pond-Water DB: The JavaScript Database
 
 **Embedded persistent or in memory database for Node.js, nw.js, Electron and browsers, 100% JavaScript, no binary dependency**. API is a subset of MongoDB's and it's <a href="#speed">plenty fast</a>.
 
 **IMPORTANT NOTE**: Please submit pull requests, bugs or feature requests. Also, please follow the <a href="#bug-reporting-guidelines">bug reporting guidelines</a> and check the <a href="https://github.com/pond-water/pwdb/wiki/Change-log" target="_blank">change log</a> before submitting an already fixed bug :)
 
-## Support PwDB development
+## Support pwDB development
 
-You can support PwDB development by sending money or bitcoins!
+You can support pwDB development by sending money or bitcoins!
 
 Money: [![Donate to author](https://fundly.com/assets/logos/v2/fundly_logo_with_text_181_50.png)](https://fundly.com/pondwater-db)
 
@@ -46,22 +46,22 @@ It is a subset of MongoDB's API (the most used operations).
 * <a href="#browser-version">Browser version</a>
 
 ### Creating/loading a database
-You can use PwDB as an in-memory only datastore or as a persistent datastore. One datastore is the equivalent of a MongoDB collection. The constructor is used as follows `new Datastore(options)` where `options` is an object with the following fields:
+You can use pwDB as an in-memory only datastore or as a persistent datastore. One datastore is the equivalent of a MongoDB collection. The constructor is used as follows `new Datastore(options)` where `options` is an object with the following fields:
 
-* `filename` (optional): path to the file where the data is persisted. If left blank, the datastore is automatically considered in-memory only. It cannot end with a `~` which is used in the temporary files PwDB uses to perform crash-safe writes.
+* `filename` (optional): path to the file where the data is persisted. If left blank, the datastore is automatically considered in-memory only. It cannot end with a `~` which is used in the temporary files pwDB uses to perform crash-safe writes.
 * `inMemoryOnly` (optional, defaults to `false`): as the name implies.
 * `timestampData` (optional, defaults to `false`): timestamp the insertion and last update of all documents, with the fields `createdAt` and `updatedAt`. User-specified values override automatic generation, usually useful for testing.
 * `autoload` (optional, defaults to `false`): if used, the database will automatically be loaded from the datafile upon creation (you don't need to call `loadDatabase`). Any command issued before load is finished is buffered and will be executed when load is done.
 * `onload` (optional): if you use autoloading, this is the handler called after the `loadDatabase`. It takes one `error` argument. If you use autoloading without specifying this handler, and an error happens during load, an error will be thrown.
-* `afterSerialization` (optional): hook you can use to transform data after it was serialized and before it is written to disk. Can be used for example to encrypt data before writing database to disk. This function takes a string as parameter (one line of an PwDB data file) and outputs the transformed string, **which must absolutely not contain a `\n` character** (or data will be lost).
-* `beforeDeserialization` (optional): inverse of `afterSerialization`. Make sure to include both and not just one or you risk data loss. For the same reason, make sure both functions are inverses of one another. Some failsafe mechanisms are in place to prevent data loss if you misuse the serialization hooks: PwDB checks that never one is declared without the other, and checks that they are reverse of one another by testing on random strings of various lengths. In addition, if too much data is detected as corrupt, PwDB will refuse to start as it could mean you're not using the deserialization hook corresponding to the serialization hook used before (see below).
-* `corruptAlertThreshold` (optional): between 0 and 1, defaults to 10%. PwDB will refuse to start if more than this percentage of the datafile is corrupt. 0 means you don't tolerate any corruption, 1 means you don't care.
+* `afterSerialization` (optional): hook you can use to transform data after it was serialized and before it is written to disk. Can be used for example to encrypt data before writing database to disk. This function takes a string as parameter (one line of an pwDB data file) and outputs the transformed string, **which must absolutely not contain a `\n` character** (or data will be lost).
+* `beforeDeserialization` (optional): inverse of `afterSerialization`. Make sure to include both and not just one or you risk data loss. For the same reason, make sure both functions are inverses of one another. Some failsafe mechanisms are in place to prevent data loss if you misuse the serialization hooks: pwDB checks that never one is declared without the other, and checks that they are reverse of one another by testing on random strings of various lengths. In addition, if too much data is detected as corrupt, pwDB will refuse to start as it could mean you're not using the deserialization hook corresponding to the serialization hook used before (see below).
+* `corruptAlertThreshold` (optional): between 0 and 1, defaults to 10%. pwDB will refuse to start if more than this percentage of the datafile is corrupt. 0 means you don't tolerate any corruption, 1 means you don't care.
 * `compareStrings` (optional): function compareStrings(a, b) compares
   strings a and b and return -1, 0 or 1. If specified, it overrides
 default string comparison which is not well adapted to non-US characters
 in particular accented letters. Native `localCompare` will most of the
 time be the right choice
-* `nodeWebkitAppName` (optional, **DEPRECATED**): if you are using PwDB from whithin a Node Webkit app, specify its name (the same one you use in the `package.json`) in this field and the `filename` will be relative to the directory Node Webkit uses to store the rest of the application's data (local storage etc.). It works on Linux, OS X and Windows. Now that you can use `require('nw.gui').App.dataPath` in Node Webkit to get the path to the data directory for your application, you should not use this option anymore and it will be removed.
+* `nodeWebkitAppName` (optional, **DEPRECATED**): if you are using pwDB from whithin a Node Webkit app, specify its name (the same one you use in the `package.json`) in this field and the `filename` will be relative to the directory Node Webkit uses to store the rest of the application's data (local storage etc.). It works on Linux, OS X and Windows. Now that you can use `require('nw.gui').App.dataPath` in Node Webkit to get the path to the data directory for your application, you should not use this option anymore and it will be removed.
 
 If you use a persistent datastore without the `autoload` option, you need to call `loadDatabase` manually.
 This function fetches the data from datafile and prepares the database. **Don't forget it!** If you use a
@@ -109,7 +109,7 @@ db.robots.loadDatabase();
 ```
 
 ### Persistence
-Under the hood, PwDB's persistence uses an append-only format, meaning that all updates and deletes actually result in lines added at the end of the datafile, for performance reasons. The database is automatically compacted (i.e. put back in the one-line-per-document format) every time you load each database within your application.
+Under the hood, pwDB's persistence uses an append-only format, meaning that all updates and deletes actually result in lines added at the end of the datafile, for performance reasons. The database is automatically compacted (i.e. put back in the one-line-per-document format) every time you load each database within your application.
 
 You can manually call the compaction function with `yourDatabase.persistence.compactDatafile` which takes no argument. It queues a compaction of the datafile in the executor, to be executed sequentially after all pending operations. The datastore will fire a `compaction.done` event once compaction is finished.
 
@@ -119,7 +119,7 @@ Keep in mind that compaction takes a bit of time (not too much: 130ms for 50k re
 
 Compaction will also immediately remove any documents whose data line has become corrupted, assuming that the total percentage of all corrupted documents in that database still falls below the specified `corruptAlertThreshold` option's value.
 
-Durability works similarly to major databases: compaction forces the OS to physically flush data to disk, while appends to the data file do not (the OS is responsible for flushing the data). That guarantees that a server crash can never cause complete data loss, while preserving performance. The worst that can happen is a crash between two syncs, causing a loss of all data between the two syncs. Usually syncs are 30 seconds appart so that's at most 30 seconds of data. <a href="http://oldblog.antirez.com/post/redis-persistence-demystified.html" target="_blank">This post by Antirez on Redis persistence</a> explains this in more details, PwDB being very close to Redis AOF persistence with `appendfsync` option set to `no`.
+Durability works similarly to major databases: compaction forces the OS to physically flush data to disk, while appends to the data file do not (the OS is responsible for flushing the data). That guarantees that a server crash can never cause complete data loss, while preserving performance. The worst that can happen is a crash between two syncs, causing a loss of all data between the two syncs. Usually syncs are 30 seconds appart so that's at most 30 seconds of data. <a href="http://oldblog.antirez.com/post/redis-persistence-demystified.html" target="_blank">This post by Antirez on Redis persistence</a> explains this in more details, pwDB being very close to Redis AOF persistence with `appendfsync` option set to `no`.
 
 
 ### Inserting documents
@@ -127,7 +127,7 @@ The native types are `String`, `Number`, `Boolean`, `Date` and `null`. You can a
 arrays and subdocuments (objects). If a field is `undefined`, it will not be saved (this is different from 
 MongoDB which transforms `undefined` in `null`, something I find counter-intuitive).
 
-If the document does not contain an `_id` field, PwDB will automatically generated one for you (a 16-characters alphanumerical string). The `_id` of a document, once set, cannot be modified.
+If the document does not contain an `_id` field, pwDB will automatically generated one for you (a 16-characters alphanumerical string). The `_id` of a document, once set, cannot be modified.
 
 Field names cannot begin by '$' or contain a '.'.
 
@@ -274,7 +274,7 @@ db.find({ planet: { $regex: /ar/, $nin: ['Jupiter', 'Earth'] } }, function (err,
 ```
 
 #### Array fields
-When a field in a document is an array, PwDB first tries to see if the query value is an array to perform an exact match, then whether there is an array-specific comparison function (for now there is only `$size` and `$elemMatch`) being used. If not, the query is treated as a query on every element and there is a match if at least one element matches.  
+When a field in a document is an array, pwDB first tries to see if the query value is an array to perform an exact match, then whether there is an array-specific comparison function (for now there is only `$size` and `$elemMatch`) being used. If not, the query is treated as a query on every element and there is a match if at least one element matches.  
 
 * `$size`: match on the size of the array
 * `$elemMatch`: matches if at least one array element matches the query entirely
@@ -528,7 +528,7 @@ db.update({ _id: 'id6' }, { $addToSet: { fruits: 'apple' } }, {}, function () {
   // If we had used a fruit not in the array, e.g. 'banana', it would have been added to the array
 });
 
-// $pull removes all values matching a value or even any PwDB query from the array
+// $pull removes all values matching a value or even any pwDB query from the array
 db.update({ _id: 'id6' }, { $pull: { fruits: 'apple' } }, {}, function () {
   // Now the fruits array is ['orange', 'pear']
 });
@@ -593,7 +593,7 @@ db.remove({}, { multi: true }, function (err, numRemoved) {
 ```
 
 ### Indexing
-PwDB supports indexing. It gives a very nice speed boost and can be used to enforce a unique constraint on a field. You can index any field, including fields in nested documents using the dot notation. For now, indexes are only used to speed up basic queries and queries using `$in`, `$lt`, `$lte`, `$gt` and `$gte`. The indexed values cannot be of type array of object.
+pwDB supports indexing. It gives a very nice speed boost and can be used to enforce a unique constraint on a field. You can index any field, including fields in nested documents using the dot notation. For now, indexes are only used to speed up basic queries and queries using `$in`, `$lt`, `$lte`, `$gt` and `$gte`. The indexed values cannot be of type array of object.
 
 To create an index, use `datastore.ensureIndex(options, cb)`, where callback is optional and get passed an error if any (usually a unique constraint that was violated). `ensureIndex` can be called when you want, even after some data was inserted, though it's best to call it at application startup. The options are:  
 
@@ -668,16 +668,16 @@ The browser version and its minified counterpart are in the `browser-version/out
 </script>
 ```
 
-If you specify a `filename`, the database will be persistent, and automatically select the best storage method available (IndexedDB, WebSQL or localStorage) depending on the browser. In most cases that means a lot of data can be stored, typically in hundreds of MB. **WARNING**: the storage system changed between v1.3 and v1.4 and is NOT back-compatible! Your application needs to resync client-side when you upgrade PwDB.
+If you specify a `filename`, the database will be persistent, and automatically select the best storage method available (IndexedDB, WebSQL or localStorage) depending on the browser. In most cases that means a lot of data can be stored, typically in hundreds of MB. **WARNING**: the storage system changed between v1.3 and v1.4 and is NOT back-compatible! Your application needs to resync client-side when you upgrade pwDB.
 
-PwDB is compatible with all major browsers: Chrome, Safari, Firefox, IE9+. Tests are in the `browser-version/test` directory (files `index.html` and `testPersistence.html`).
+pwDB is compatible with all major browsers: Chrome, Safari, Firefox, IE9+. Tests are in the `browser-version/test` directory (files `index.html` and `testPersistence.html`).
 
 If you fork and modify pwdb, you can build the browser version from the sources, the build script is `browser-version/build.js`.
 
 
 ## Performance
 ### Speed
-PwDB is not intended to be a replacement of large-scale databases such as MongoDB, and as such was not designed for speed. That said, it is still pretty fast on the expected datasets, especially if you use indexing. On a typical, not-so-fast dev machine, for a collection containing 10,000 documents, with indexing:  
+pwDB is not intended to be a replacement of large-scale databases such as MongoDB, and as such was not designed for speed. That said, it is still pretty fast on the expected datasets, especially if you use indexing. On a typical, not-so-fast dev machine, for a collection containing 10,000 documents, with indexing:  
 * Insert: **10,680 ops/s**
 * Find: **43,290 ops/s**
 * Update: **8,000 ops/s**
@@ -692,12 +692,12 @@ expected kind of datasets (20MB for 10,000 2KB documents).
 ## Use in other services
 * pwCMS: a Content Management System and Blog platform backed by pwDB. <a href="https://github.com/Pond-Water/pwCMS" target="_blank">Beta available!<a>
 * Coming Soon! pwSession: a session store for Express, backed by pwDB
-* Coming Soon! pwLogger: If you mostly use PwDB for logging purposes and don't want the memory footprint of your application to grow too large, you can use pwLogger to insert documents in a pwDB database
-* Coming Soon! pwTransfer: If you've outgrown PwDB, switching to MongoDB won't be too hard as it is the same API. A utility to transfer the data from a PwDB database to a MongoDB collection
+* Coming Soon! pwLogger: If you mostly use pwDB for logging purposes and don't want the memory footprint of your application to grow too large, you can use pwLogger to insert documents in a pwDB database
+* Coming Soon! pwTransfer: If you've outgrown pwDB, switching to MongoDB won't be too hard as it is the same API. A utility to transfer the data from a pwDB database to a MongoDB collection
 * Coming Soon! pwODM: Object Data Modeling for pwDB 
 
 ## Pull requests
-**Important: I consider PwDB to be feature-complete, i.e. it does everything I think it should and nothing more. As a general rule I will not accept pull requests anymore, except for bugfixes (of course) or if I get convinced I overlook a strong usecase. Please make sure to open an issue before spending time on any PR.**
+**Important: I consider pwDB to be feature-complete, i.e. it does everything I think it should and nothing more. As a general rule I will not accept pull requests anymore, except for bugfixes (of course) or if I get convinced I overlook a strong usecase. Please make sure to open an issue before spending time on any PR.**
 
 If you submit a pull request, thanks! There are a couple rules to follow though to make it manageable:
 * The pull request should be atomic, i.e. contain only one feature. If it contains more, please submit multiple pull requests. Reviewing massive, 1000 loc+ pull requests is extremely hard.
@@ -707,7 +707,7 @@ If you submit a pull request, thanks! There are a couple rules to follow though 
 * Don't forget tests for your new feature. Also don't forget to run the whole test suite before submitting to make sure you didn't introduce regressions.
 * Do not build the browser version in your branch, I'll take care of it once the code is merged.
 * Update the readme accordingly.
-* Last but not least: keep in mind what PwDB's mindset is! The goal is not to be a replacement for MongoDB, but to have a pure JS database, easy to use, cross platform, fast and expressive enough for the target projects (small and self contained apps on server/desktop/browser/mobile). Sometimes it's better to shoot for simplicity than for API completeness with regards to MongoDB.
+* Last but not least: keep in mind what pwDB's mindset is! The goal is not to be a replacement for MongoDB, but to have a pure JS database, easy to use, cross platform, fast and expressive enough for the target projects (small and self contained apps on server/desktop/browser/mobile). Sometimes it's better to shoot for simplicity than for API completeness with regards to MongoDB.
 
 ## Bug reporting guidelines
 If you report a bug, thank you! That said for the process to be manageable please strictly adhere to the following guidelines. I'll not be able to handle bug reports that don't:
@@ -718,7 +718,7 @@ If you report a bug, thank you! That said for the process to be manageable pleas
 * The code should be Javascript, not Coffeescript.
 
 ### Bitcoins
-You don't have time? You can support PwDB by sending bitcoins to this address: [@todo]
+You don't have time? You can support pwDB by sending bitcoins to this address: [@todo]
 
 
 ## License 
