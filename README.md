@@ -17,16 +17,15 @@ Bitcoin address: [@TODO:]
 No time to <a href="#pull-requests">help out</a>? 
 
 
-## Installation, tests
-Module name on npm and bower is `pwdb`.
+## Barebones example
+Module name on npm  is `pwdb`.
 
 ```
 npm init                   # Create package.json
 npm install pwdb --save    # Put latest version in your package.json
-npm test                   # You'll need the dev dependencies to launch tests
 ```
 
-## Barebones example
+Create file called server.js, add contents below.
 
 ```
 // Type 1: In-memory only datastore (no need to load the database)
@@ -71,8 +70,14 @@ db.find({_type: 'barebones'
     // If no document is found, docs is equal to []
     console.log("barebones count: " + docs.length);
 });
-
 ```
+
+Run barebones
+```
+node server.js
+```
+
+
 
 ## API
 It is a subset of MongoDB's API (the most used operations).
