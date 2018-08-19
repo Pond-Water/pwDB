@@ -724,3 +724,10 @@ You don't have time? You can support pwDB by sending bitcoins to this address: [
 ## License 
 
 See [License](LICENSE)
+
+## Open Source used in this product
+
+See [LICENSES](LICENSES)
+
+## Special Thank You!
+NeDB - Launched this works and provided inspiration (https://github.com/louischatriot/nedb)
