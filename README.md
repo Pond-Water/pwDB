@@ -23,7 +23,54 @@ Module name on npm and bower is `pwdb`.
 ```
 npm install pwdb --save    # Put latest version in your package.json
 npm test                   # You'll need the dev dependencies to launch tests
-bower install pwdb         # For the browser versions, which will be in browser-version/out
+```
+
+## Barebones example
+
+```
+// Type 1: In-memory only datastore (no need to load the database)
+var Datastore = require('pwdb'),
+    db = new Datastore();
+
+var doc = {
+    _type: 'barebones',
+    n: 5,
+    today: new Date(),
+    pwdbIsAwesome: true,
+    notthere: null,
+    notToBeSaved: undefined,
+    fruits: ['apple', 'orange', 'pear'],
+    info: {
+        name: 'pwdb'
+    }
+};
+
+var doc2 = {
+    _type: 'barebones',
+    n: 100,
+    info: {
+        name: 'pwdb'
+    }
+}
+
+db.insert(doc, function (err, newDoc) { // Callback is optional
+    // newDoc is the newly inserted document, including its _id
+    // newDoc has no key called notToBeSaved since its value was undefined
+    console.log("New _id: " + newDoc._id);
+});
+
+db.insert(doc2, function (err, newDoc) { // Callback is optional
+    console.log("New _id: " + newDoc._id);
+});
+
+// Finding all barebones in pwdb
+db.find({_type: 'barebones'
+}, function (err, docs) {
+    // docs is an array containing documents 
+    // If no document is found, docs is equal to []
+    console.log("barebones count: " + docs.length);
+});
+
 ```
 
 ## API
