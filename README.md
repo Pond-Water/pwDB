@@ -14,7 +14,7 @@ Money: [![Donate to author](https://fundly.com/assets/logos/v2/fundly_logo_with_
 
 Bitcoin address: [@TODO:]
 
-No time to <a href="#pull-requests">help out</a>? 
+No funds? How about <a href="#pull-requests">helping out</a>? 
 
 
 ## Barebones example
