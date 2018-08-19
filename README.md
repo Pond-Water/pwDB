@@ -21,6 +21,7 @@ No time to <a href="#pull-requests">help out</a>?
 Module name on npm and bower is `pwdb`.
 
 ```
+npm init                   # Create package.json
 npm install pwdb --save    # Put latest version in your package.json
 npm test                   # You'll need the dev dependencies to launch tests
 ```
