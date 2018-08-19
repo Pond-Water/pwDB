@@ -77,7 +77,12 @@ Run barebones
 node server.js
 ```
 
-
+Console output - should be 2 _id (yours will be different) and count: 2
+```
+New _id: m2siFRaGd8UbLY0b
+New _id: a3FI1onHFaHFOpJH
+barebones count: 2
+```
 
 ## API
 It is a subset of MongoDB's API (the most used operations).
