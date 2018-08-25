@@ -1,6 +1,6 @@
 {
   "name": "pwdb",
-  "version": "2.3.0",
+  "version": "2.3.2",
   "author": {
     "name": "Brian Carter",
     "email": "briancarter@chipsofttech.com"
@@ -27,7 +27,7 @@
     "underscore": "~1.4.4" 
   },
   "devDependencies": {
-    "chai": "^3.2.0",
+    "chai": "^4.0.0",
     "commander": "1.1.1",
     "exec-time": "0.0.2",
     "mocha": "^5.2.0",
