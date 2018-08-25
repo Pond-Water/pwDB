@@ -3,6 +3,6 @@
     "async": "~0.2.9",
     "browserify": "^16.2.2",
     "fs-extra": "~0.6.3",
-    "uglify-js": "^2.8.29"
+    "uglify-js": "^3.4.8"
   }
 }
