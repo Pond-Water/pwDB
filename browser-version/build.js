@@ -70,7 +70,7 @@ child_process.exec('npm install', { cwd: __dirname }, function (err, stdout, std
       , srcPath = path.join(__dirname, 'src/lib/datastore.js');
 
     b.add(srcPath);
-    b.bundle(function (err, out) {
+    b.bundle({ standalone: 'Pwdb' }, function (err, out) {
       if (err) { return cb(err); }
       fs.writeFile(path.join(__dirname, 'out/pwdb.js'), out, 'utf8', function (err) {
         if (err) {
@@ -82,25 +82,10 @@ child_process.exec('npm install', { cwd: __dirname }, function (err, stdout, std
     });
   }
   , function (out, cb) {
-    console.log("Creating the minified version");
+      console.log("Creating the minified version");
 
-    var filesContents = ['out/pwdb.js'].map(function (file) {
-      return fs.readFileSync(file, 'utf8');
-    })
-
-    var result = uglify.minify(filesContents);
-
-    if (result.error) {
-      console.error("Error minifying: " + result.error);
-    }
-
-    fs.writeFile("out/pwdb.min.js", result.code, function (err) {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log("File was successfully saved.");
-      }
-    });
+      var compressedCode = uglify.minify(out, { fromString: true });
+      fs.writeFile(path.join(__dirname, 'out/pwdb.min.js'), compressedCode.code, 'utf8', cb);
   }
   ], function (err) {
     if (err) {
