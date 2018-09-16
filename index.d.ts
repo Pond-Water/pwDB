@@ -4,8 +4,6 @@
 export = Pwdb;
 export as namespace Pwdb;
 
-declare module 'Pwdb';
-
 declare class Pwdb {
     constructor(pathOrOptions?: string | Pwdb.DataStoreOptions);
 
