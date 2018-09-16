@@ -737,6 +737,16 @@ pwDB is compatible with all major browsers: Chrome, Safari, Firefox, IE9+. Tests
 
 If you fork and modify pwdb, you can build the browser version from the sources, the build script is `browser-version/build.js`.
 
+Using cmd or shell, navigate to /browser-version
+```
+node build.js
+```
+
+Use HTTP-Server or a another web server:
+http://localhost:8080/test/
+
+
+
 
 ## Performance
 ### Speed
