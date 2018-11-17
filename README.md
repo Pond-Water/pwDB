@@ -8,11 +8,7 @@
 
 ## Support pwDB development
 
-You can support pwDB development by sending money or bitcoins!
-
-Money: [![Donate to author](https://fundly.com/assets/logos/v2/fundly_logo_with_text_181_50.png)](https://fundly.com/pondwater-db)
-
-Bitcoin address: [@TODO:]
+You can support pwDB development by coding, debugging, ideas, or funds!
 
 No funds? How about <a href="#pull-requests">helping out</a>? 
 
